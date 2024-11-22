@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('piattis', function (Blueprint $table) {
             $table->id();
-            $table->string('name',64);
-            $table->string('ingredients',128);
-            $table->integer('price');
+            $table->string('name');
+            $table->text('ingredient');
+            $table->string('price');
             //VISIBILE SI/NO
             $table->timestamps();
         });
