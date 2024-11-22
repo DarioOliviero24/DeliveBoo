@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Restaurant;
 use Faker\Generator as Faker;
 
 class RestaurantSeeder extends Seeder
@@ -15,12 +16,12 @@ class RestaurantSeeder extends Seeder
     {
         for ($i = 0; $i < 10; $i++) {
             $restaurant = [
-                $name=> $faker->$name,
-                $address=> $faker->$address,
-                $BusinessNumber=> $faker->$BusinessNumber
+                'name' => $faker->company,
+                'address' => $faker->address,
+                'business_number' => $faker->phoneNumber,
             ];
 
-            $newRestaurant = Restaurant::create($restaurant);
+            Restaurant::create($restaurant);
         }
     }
 }
