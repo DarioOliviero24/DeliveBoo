@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Piatti;
+use App\Models\Plates;
 use Illuminate\Http\Request;
 
-class PiattiController extends Controller
+class PlatesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PiattiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Piatti $piatti)
+    public function show(Plates $plates)
     {
         //
     }
@@ -42,7 +42,7 @@ class PiattiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Piatti $piatti)
+    public function edit(Plates $plates)
     {
         //
     }
@@ -50,7 +50,7 @@ class PiattiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Piatti $piatti)
+    public function update(Request $request, Plates $plates)
     {
         //
     }
@@ -58,7 +58,7 @@ class PiattiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Piatti $piatti)
+    public function destroy(Plates $plates)
     {
         //
     }
