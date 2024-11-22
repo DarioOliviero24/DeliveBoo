@@ -28,4 +28,8 @@ Route::prefix('admin')
 
 });
 
+Route::post('/register-restaurant', [RestaurantController::class, 'register']);
+
+
+
 require __DIR__.'/auth.php';
