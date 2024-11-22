@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Plates;
 use Faker\Generator as Faker;
 
-class PiattiSeeder extends Seeder
+class PlatesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
