@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('ingredient');
-            $table->string('price');
+            $table->float('price', 8, 2);
             //VISIBILE SI/NO
             $table->timestamps();
         });
