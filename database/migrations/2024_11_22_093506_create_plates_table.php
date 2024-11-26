@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('ingredient');
             $table->float('price', 8, 2);
-            $table->boolean('visible');  //VISIBILE SI/NO
+            //VISIBILE SI/NO
             $table->foreignId('restaurants_id')->constrained('restaurants')->onDelete('cascade');
             $table->timestamps();
         });
