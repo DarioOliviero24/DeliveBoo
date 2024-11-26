@@ -18,7 +18,7 @@ class RestaurantSeeder extends Seeder
             $restaurant = [
                 'name' => $faker->company,
                 'address' => $faker->address,
-                'business_number' => $faker->phoneNumber,
+                'P_Iva' => $faker->numerify('################'),
             ];
 
             Restaurant::create($restaurant);
