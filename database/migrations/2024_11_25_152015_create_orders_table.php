@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome_guest');
             $table->string('mail_guest');
             $table->string('telefono_guest');
-            $table->integer('prezzo_totale');
+            $table->float('prezzo_totale');
             $table->timestamps();
         });
     }

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('plates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('ingredient');
+            $table->string('plate_name');
+            $table->string('ingredients');
             $table->float('price', 8, 2);
             //VISIBILE SI/NO
+            $table->boolean('visible')->default(true);
             $table->foreignId('restaurants_id')->constrained('restaurants')->onDelete('cascade');
             $table->timestamps();
         });

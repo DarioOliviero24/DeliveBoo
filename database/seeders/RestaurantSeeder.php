@@ -5,23 +5,33 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Restaurant;
-use Faker\Generator as Faker;
+use App\Models\User;
+use Faker\Factory as Faker;
 
 class RestaurantSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(Faker $faker): void
+    public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        $faker = Faker::create();
+
+        for ($i = 0; $i < 20; $i++) {
             $restaurant = [
                 'name' => $faker->company,
                 'address' => $faker->address,
-                'P_Iva' => $faker->numerify('################'),
+                'P_Iva' => $this->generatePiva(),
+                'user_id' => User::all()->random()->id,
             ];
 
             Restaurant::create($restaurant);
         }
+    }
+    public function generatePiva()
+    {
+        $faker = Faker::create();
+
+        return $faker->numerify('################');
     }
 }

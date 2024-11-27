@@ -15,33 +15,46 @@ class PlatesSeeder extends Seeder
     public function run(Faker $faker): void
     {
         $ingredients = [
-            'Sugar', 
-            'Flour', 
+            'Sugar',
+            'Flour',
             'Salt',
             'Butter',
-            'Milk', 
+            'Milk',
             'Eggs',
             'Cheese',
-            'Tomatoes', 
+            'Tomatoes',
             'Basil',
-            'Garlic', 
-            'Onion', 
+            'Garlic',
+            'Onion',
             'Pepper',
             'Chocolate',
-            'Vanilla', 
+            'Vanilla',
             'Cream'
         ];
 
         $restaurantIds = Restaurant::pluck('id')->toArray();
 
-        if (empty($restaurantIds)) {
-            throw new \Exception('La tabella restaurants non contiene ristoranti. Inserisci dei ristoranti prima di eseguire questo seeder.');
-        }
-
         for ($i = 0; $i < 10; $i++) {
+
+            $ingredientsArrayRecipe = [];
+
+            foreach($ingredients as $ingredient) {
+
+                $random = $faker->boolean;
+
+                if($random) {
+                    $ingredientsArrayRecipe[] = $ingredient;
+                }
+
+                if (count($ingredientsArrayRecipe) > 4) {
+                    break;
+                }
+            }
+
             Plates::create([
-                'name' => $faker->word,
-                'ingredient' => $ingredients[array_rand($ingredients)],
+
+                'plate_name' => $faker->word,
+                'ingredients' => implode(', ', $ingredientsArrayRecipe),
                 'price' => $faker->randomFloat(2, 5, 50),
                 'restaurants_id' => $faker->randomElement($restaurantIds),
                 'created_at' => now(),
@@ -50,3 +63,5 @@ class PlatesSeeder extends Seeder
         }
     }
 }
+
+
