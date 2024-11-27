@@ -17,7 +17,7 @@ class RestaurantSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $restaurant = [
                 'name' => $faker->company,
                 'address' => $faker->address,

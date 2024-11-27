@@ -16,23 +16,22 @@ class CategoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        $restaurantIds = Restaurant::pluck('id')->toArray();
         $categories = [
             'italiano',
             'spagnolo',
             'giapponese',
             'cinese',
             'indiano',
-            'messicano',
         ];
 
-        foreach ($restaurantIds as $restaurantId) {
-            foreach ($categories as $category) {
-                Categories::create([
-                    'name' => $category,
-                    'restaurant_id' => $restaurantId,
-                ]);
-            }
-        }
+        $restaurantIds = Restaurant::orderBy('id', 'asc')->pluck('id')->toArray();
+
+
+        for ($i = 0; $i < count($categories); $i++) {
+            Categories::create([
+                'tipologia' => $categories[$i],
+                'restaurant_id' => $restaurantIds[$i],
+            ]);
+        }  
     }
 }
