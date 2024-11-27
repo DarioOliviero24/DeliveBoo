@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->string('numero_16_cifre', 16)->unique();
+            $table->string('P_Iva', 11)->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
