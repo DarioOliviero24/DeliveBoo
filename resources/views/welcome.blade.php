@@ -3,7 +3,7 @@
 @section('main-content')
     <div style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <h1 class="text-center" style="color: #007bff; font-size: 2.5rem;">
-            DeliveBoo ciao
+            DeliveBoo
         </h1>
         <h2 style="color: #6c757d; font-size: 2rem;">
             @foreach ($restaurants as $restaurant)
