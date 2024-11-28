@@ -69,9 +69,10 @@ class RestaurantController extends Controller
             'Vanilla',
             'Cream'
         ];
+        
         $plate = Plates::find($id);
         $existingIngredients = explode(',', $plate->ingredients);
-        $restaurant = Restaurant::find($id);
+        $restaurant = Restaurant::find($plate->restaurants_id);
         return view('admin.restaurants.edit', compact('plate', 'restaurant', 'ingredients', 'existingIngredients'));
     }
 

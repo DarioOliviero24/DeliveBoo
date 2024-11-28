@@ -19,6 +19,17 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarText">
+                        
+                        @auth
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.restaurants.index') }}">Restaurants</a>
+                                </li>
+                            </ul>
+                        @else
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -27,7 +38,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">Register</a>
                                 </li>
                             </ul>
-
+                        @endauth
                         @auth
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
