@@ -11,5 +11,5 @@ class Plates extends Model
 
     protected $table = 'plates';
 
-    protected $fillable = ['name', 'ingredient', 'price', 'restaurants_id'];
+    protected $fillable = ['plate_name', 'ingredients', 'price', 'restaurants_id'];
 }
