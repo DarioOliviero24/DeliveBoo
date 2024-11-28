@@ -13,7 +13,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::where('user_id', auth()->id())->get();
         return view('admin.restaurants.index', compact('restaurants'));
     }
 
@@ -43,7 +43,7 @@ class RestaurantController extends Controller
     public function show(string $id)
     {
         $restaurant = Restaurant::find($id);
-        $plates = Plates::all();
+        $plates = Plates::where('restaurants_id', $id)->get();
         return view('admin.restaurants.show', compact('restaurant', 'plates'));
     }
 

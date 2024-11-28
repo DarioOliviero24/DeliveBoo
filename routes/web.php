@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\Admin\RestaurantController;
+use App\Http\Controllers\WelcomeLoggatoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,14 @@ use App\Http\Controllers\Admin\RestaurantController;
 |
 */
 
+// Welcome home per tutti
 Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('show/{id}', [MainController::class, 'show'])->name('home.show');
 
+// WelcomeLoggato home per loggati
+Route::resource('welcomeLoggato', WelcomeLoggatoController::class);
+
+// Admin home per loggati
 Route::prefix('admin')
     ->name('admin.')
     ->middleware('auth')
