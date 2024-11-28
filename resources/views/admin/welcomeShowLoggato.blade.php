@@ -1,22 +1,27 @@
 @extends('layouts.app')
 
 @section('main-content')
-    <div class="text-center" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #007bff; font-size: 2.5rem;">
+    <div class="text-center" style="background-color: #F5FFFA; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: black; font-size: 2.5rem;">
             Show {{ $restaurant->name }}
         </h1>
         <h2 style="color: #6c757d; font-size: 2rem;">
             {{ $restaurant->name }}
         </h2>
-        <div style="margin-top: 20px;">
+        <div style="background-color: #F5FFFA; padding: 0px; border-radius: 10px; ">
             @foreach ($plates as $plate)
-                <div style="background-color: #ffffff; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-                    <h3 style="color: #28a745;">{{ $plate->plate_name }}</h3>
-                    <p style="color: #6c757d;">Ingredients: {{ $plate->ingredients }}</p>
-                    <p style="color: #dc3545;">Price: ${{ number_format($plate->price, 2) }}</p>
+                <div style="margin: 10px 5px; width: 40%; height: 350px;" class="card d-inline-flex text-center">
+                    <div class="card-body">
+                        <h2 style="color: black;">{{ $plate->plate_name }}</h2>
+                        <p style="color: #6c757d;">Ingredients: {{ $plate->ingredients }}</p>
+                        <p style="color: #dc3545;">Price: $<strong>{{ number_format($plate->price, 2) }}</strong></p>
+                    </div>
                 </div>
             @endforeach
-            <a href="{{ route('welcomeLoggato.index') }}" class="btn btn-primary">Back</a>
+            <div class="py-4">
+                 <a href="{{ route('welcomeLoggato.index') }}" class="btn btn-outline-danger"><strong>BACK</strong></a>
+            </div>
         </div>
+
     </div>
 @endsection
