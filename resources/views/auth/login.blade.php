@@ -5,39 +5,44 @@
         @csrf
 
         <!-- Email Address -->
-        <div>
+        <div class="text-center py-2">
             <label for="email">
-                Email
+                <h3>
+                    Email
+                </h3>
             </label>
-            <input type="email" id="email" name="email">
+            <input class="form-control me-2" placeholder="Inserisci l'email..." type="email" id="email" name="email">
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-4 text-center py-2">
             <label for="password">
-                Password
+                <h3>
+                    Password
+                </h3>
             </label>
-            <input type="password" id="password" name="password">
+            <input class="form-control me-2" placeholder="Inserisci la password..." type="password" id="password" name="password">
         </div>
 
         <!-- Remember Me -->
-        <div class="mt-4">
-            <label for="remember_me">
-                <input id="remember_me" type="checkbox" name="remember">
-                <span>Remember me</span>
+        <div class="mt-4 text-center py-2">
+            <label for="remember_me" class="form-check-label">
+                <input id="remember_me" type="checkbox" name="remember" class="form-check-input me-1">
+                Ricordami
             </label>
         </div>
 
-        <div class="mt-4">
-            @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <button type="submit">
+        <div class="text-center py-5">
+            <button class="btn btn-primary" type="submit">
                 Log in
             </button>
+            <div class="mt-2">
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}">
+                        {{ __('Hai dimenticato la password?') }}
+                    </a>
+                @endif
+            </div>
         </div>
     </form>
 @endsection
