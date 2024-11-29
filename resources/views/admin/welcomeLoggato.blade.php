@@ -3,6 +3,7 @@
 @section('main-content')
     <div style="background-color: #F5FFFA; padding: 20px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
         <h1 class="text-center" style="color: black; font-size: 2.5rem;">
+            //TODO: Aggiungere il nome del loger di fianco a DELIVEBOO
             WELCOME TO DELIVEBOO
         </h1>
         <h2 class="text-center">
