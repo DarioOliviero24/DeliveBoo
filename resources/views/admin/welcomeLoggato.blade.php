@@ -6,6 +6,14 @@
             //TODO: Aggiungere il nome del loger di fianco a DELIVEBOO
             WELCOME TO DELIVEBOO
         </h1>
+        <div class="input-group mb-3 w-25 container">
+            <select class="form-select" id="inputGroupSelect01">
+              <option selected>Scegli il tipo di ristorante...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+        </div>
         <h2 class="text-center">
             @foreach ($restaurants as $restaurant)
                 <div style="margin: 10px 0; width: 40%; height: 350px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);" class="card d-inline-flex text-center">
