@@ -8,7 +8,9 @@
         @foreach ($restaurants as $restaurant)
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ $restaurant->name }}
-                <a href="{{ route('admin.restaurants.show', $restaurant->id) }}" class="btn btn-primary btn-sm">Visualizza Ristorante</a>
+                <a href="{{ route('admin.restaurants.show', $restaurant->id) }}" class="btn btn-outline-primary btn-sm">
+                    Visualizza Ristorante
+                </a>
             </li>
         @endforeach
     </ul>
