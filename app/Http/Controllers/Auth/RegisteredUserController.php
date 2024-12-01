@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Restaurant;
+use App\Models\Plates;
 
 class RegisteredUserController extends Controller
 {
@@ -34,6 +36,12 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'restaurant_name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'P_Iva' => ['required', 'string', 'max:255'],
+            'plate_name' => ['required', 'string', 'max:255'],
+            'ingredients' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
@@ -43,6 +51,25 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+
+        $restaurant = Restaurant::create([
+            'name' => $request->restaurant_name,
+            'address' => $request->address,
+            'P_Iva' => $request->P_Iva,
+            'user_id' => $user->id,
+        ]);
+
+        $restaurant->save();
+
+        $plate = Plates::create([
+            'plate_name' => $request->plate_name,
+            'ingredients' => $request->ingredients,
+            'price' => $request->price,
+            'restaurants_id' => $restaurant->id,
+        ]);
+
+        $plate->save();
 
         Auth::login($user);
 

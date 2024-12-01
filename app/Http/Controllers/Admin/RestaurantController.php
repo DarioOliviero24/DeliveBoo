@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\Plates;
+use App\Providers\RouteServiceProvider;
+
 class RestaurantController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+        return redirect(RouteServiceProvider::HOME);
     }
 
     /**
