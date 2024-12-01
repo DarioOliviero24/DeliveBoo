@@ -21,9 +21,8 @@
                     @endforeach
                     <strong>Prezzo:</strong> <input type="number" name="price" placeholder="inserisci il prezzo del piatto" class="form-control" step="0.01" min="0">
                     <input type="hidden" name="restaurant_id" value="{{ $restaurant_id->id }}">
-                    <button type="submit" class="btn btn-primary btn-sm">Salva</button>
+                    <button style="margin:10px 0;" type="submit" class="btn btn-primary btn-sm">Salva</button>
                 </form>
-                indietro
     </ul>
 
 
