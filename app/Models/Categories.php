@@ -11,7 +11,11 @@ class Categories extends Model
 {
     use HasFactory;
 
-    public function restaurant(): BelongTo {
-        return $this->BelongsTo(Restaurant::class);
+    protected $fillable = [
+        'tipologia',
+        'restaurant_id'
+    ];
+    public function restaurant(): BelongsTo {
+        return $this->belongsTo(Restaurant::class);
     }
 }

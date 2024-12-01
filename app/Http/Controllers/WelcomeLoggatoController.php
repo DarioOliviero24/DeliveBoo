@@ -13,8 +13,38 @@ class WelcomeLoggatoController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
-        return view('admin.welcomeLoggato', compact('restaurants'));
+        $categorieList = [
+            'tutti',
+            'italiano',
+            'spagnolo',
+            'giapponese',
+            'cinese',
+            'indiano',
+        ];
+        $restaurants = Restaurant::with('categories')->get();
+        return view('admin.welcomeLoggato', compact('restaurants', 'categorieList'));
+    }
+
+    public function filter(Request $request)
+    {
+        $categorieList = [
+            'tutti',
+            'italiano',
+            'spagnolo',
+            'giapponese',
+            'cinese',
+            'indiano',
+        ];
+        if($request->tipologia !== 'tutti'){
+            $restaurants = Restaurant::with('categories')
+                ->whereHas('categories', function($query) use ($request) {
+                    $query->where('tipologia', $request->tipologia);
+                })->get();
+        }else{
+            $restaurants = Restaurant::with('categories')->get();
+        }
+        $optionValue = $request->tipologia;
+        return view('admin.welcomeLoggato', compact('restaurants', 'categorieList'));
     }
 
     /**

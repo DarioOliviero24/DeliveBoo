@@ -14,7 +14,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\Restaurant;
 use App\Models\Plates;
-
+use App\Models\Categories;
 class RegisteredUserController extends Controller
 {
     /**
@@ -22,7 +22,14 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $categoriesList = [
+            'italiano',
+            'spagnolo',
+            'giapponese',
+            'cinese',
+            'indiano',
+        ];
+        return view('auth.register', compact('categoriesList'));
     }
 
     /**
@@ -40,6 +47,7 @@ class RegisteredUserController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'P_Iva' => ['required', 'string', 'max:255'],
             'plate_name' => ['required', 'string', 'max:255'],
+            'tipologia' => ['required', 'string', 'max:255'],
             'ingredients' => ['required', 'string', 'max:255'],
             'price' => ['required', 'string', 'max:255'],
         ]);
@@ -61,6 +69,11 @@ class RegisteredUserController extends Controller
         ]);
 
         $restaurant->save();
+
+        $category = Categories::create([
+            'tipologia' => $request->tipologia,
+            'restaurant_id' => $restaurant->id,
+        ]);
 
         $plate = Plates::create([
             'plate_name' => $request->plate_name,

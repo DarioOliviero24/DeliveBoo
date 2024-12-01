@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Categories;
 
 class Restaurant extends Model
@@ -19,8 +20,12 @@ class Restaurant extends Model
         'user_id',
     ];
 
-    public function user(): HasOne {
+    public function user(): BelongsTo {
 
-        return $this->hasOne(Categories::class);
+        return $this->belongsTo(User::class);
+    }
+    
+    public function categories(): HasMany {
+        return $this->hasMany(Categories::class);
     }
 }

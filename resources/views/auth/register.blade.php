@@ -10,6 +10,11 @@
             </ul>
         </div>
     @endif
+    <h1 class="py-5" style="color:red;">
+        <strong>
+            Dati Personali
+        </strong>
+    </h1>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -61,8 +66,24 @@
                     Nome del ristorante
                 </h3>
             </label>
-            <input type="text" name="restaurant_name" id="restaurant_name">
+            <input class="form-control me-2" placeholder="Inserisci il nome del ristorante..." type="text" name="restaurant_name" id="restaurant_name">
         </div>
+
+        <!-- tipologia -->
+        <div class="mt-4 text-center py-2">
+            <label for="tipologia">
+                <h3>
+                    Tipologia
+                </h3>
+            </label>
+            <br>
+            <select name="tipologia" id="tipologia">
+                @foreach ($categoriesList as $category)
+                    <option value="{{ $category }}">{{ $category }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <!-- address -->
         <div class="mt-4 text-center py-2">
             <label for="address">
@@ -70,7 +91,7 @@
                     Indirizzo
                 </h3>
             </label>
-            <input type="text" name="address" id="address">
+            <input class="form-control me-2" placeholder="Inserisci l'indirizzo..." type="text" name="address" id="address">
         </div>
      <!-- PIVA -->
         <div class="mt-4 text-center py-2">
@@ -82,15 +103,11 @@
             <input class="form-control me-2" placeholder="Inserisci la PIVA..." type="text" id="piva" name="P_Iva">
         </div>
 
-
+        <h1 class="py-5" style="color:red;">
+            <strong>Aggiungere Menu</strong>
+        </h1>
         <!-- creare almeno un piatto -->
-        <div class="mt-4 text-center py-2">
-            <label for="plates">
-                <h3>
-                    Creare almeno un piatto
-                </h3>
-            </label>
-        </div>
+
         <!-- plate_name -->
         <div class="mt-4 text-center py-2">
             <label for="plate_name">
@@ -98,7 +115,7 @@
                     Nome del piatto
                 </h3>
             </label>
-            <input type="text" name="plate_name" id="plate_name">
+            <input class="form-control me-2" placeholder="Inserisci il nome del piatto..." type="text" name="plate_name" id="plate_name">
         </div>
         <!-- ingredients -->
         <div class="mt-4 text-center py-2">
@@ -107,7 +124,7 @@
                     Ingredienti
                 </h3>
             </label>
-            <input type="text" name="ingredients" id="ingredients">
+            <input class="form-control me-2" placeholder="Inserisci gli ingredienti..." type="text" name="ingredients" id="ingredients">
         </div>
         <!-- price -->
         <div class="mt-4 text-center py-2">
@@ -116,7 +133,7 @@
                     Prezzo
                 </h3>
             </label>
-            <input type="text" name="price" id="price">
+            <input class="form-control me-2" placeholder="Inserisci il prezzo..." type="text" name="price" id="price">
         </div>
 
         <div class="text-center py-5">

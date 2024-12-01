@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\PlatesController;
 // Welcome home per tutti
 Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('show/{id}', [MainController::class, 'show'])->name('home.show');
+Route::get('filter', [MainController::class, 'filter'])->name('home.filter');
 
 // WelcomeLoggato home per loggati
 Route::resource('welcomeLoggato', WelcomeLoggatoController::class);
@@ -39,6 +40,7 @@ Route::prefix('admin')
     Route::resource('restaurants', RestaurantController::class);
     Route::resource('plates', PlatesController::class);
     Route::get('plates/create/{id}', [PlatesController::class, 'create'])->name('plates.create');
+    Route::get('welcomeLoggato/filter', [WelcomeLoggatoController::class, 'filter'])->name('welcomeLoggato.filter');
 
 });
 
