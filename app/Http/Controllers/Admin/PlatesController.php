@@ -62,10 +62,10 @@ class PlatesController extends Controller
             'restaurant_id' => 'required|exists:restaurants,id',
         ]);
 
-        $ingredients = implode(', ', $request->ingredients);
+
 
         $data = $request->all();
-        $data['ingredients'] = $ingredients;
+        $data['ingredients'] = $request->$ingredients;
         $data['restaurants_id'] = $request->restaurant_id;
 
         $newPlate = new Plates($data);

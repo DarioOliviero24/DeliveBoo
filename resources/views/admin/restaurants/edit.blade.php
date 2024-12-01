@@ -10,10 +10,9 @@
                 @csrf
                 @method('PUT')
                 <strong>Nome del piatto:</strong> <input type="text" name="plate_name" value="{{ $plate->plate_name }}" class="form-control"><br>
-                @foreach ($ingredients as $ingredient)
-                        <input type="checkbox" name="ingredients[]" value="{{ $ingredient }}"
-                            @if(in_array($ingredient, $existingIngredients)) checked @endif> {{ $ingredient }}<br>
-                @endforeach
+
+                <strong>Ingredienti:</strong> <input type="text" name="ingredients" value="{{ $plate->ingredients }}" class="form-control"><br>
+                
                 <strong>Prezzo:</strong> <input type="number" name="price" value="{{ $plate->price }}" class="form-control" step="0.01" min="0">
                 <button type="submit" class="btn btn-primary btn-sm" style="margin: 20px 0;">
                     Salva

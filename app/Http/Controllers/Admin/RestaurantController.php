@@ -54,28 +54,12 @@ class RestaurantController extends Controller
      */
     public function edit(string $id)
     {
-        $ingredients = [
-            'Sugar',
-            'Flour',
-            'Salt',
-            'Butter',
-            'Milk',
-            'Eggs',
-            'Cheese',
-            'Tomatoes',
-            'Basil',
-            'Garlic',
-            'Onion',
-            'Pepper',
-            'Chocolate',
-            'Vanilla',
-            'Cream'
-        ];
+        
         
         $plate = Plates::find($id);
-        $existingIngredients = explode(',', $plate->ingredients);
+        $existingIngredients = $plate->ingredients;
         $restaurant = Restaurant::find($plate->restaurants_id);
-        return view('admin.restaurants.edit', compact('plate', 'restaurant', 'ingredients', 'existingIngredients'));
+        return view('admin.restaurants.edit', compact('plate', 'restaurant', 'existingIngredients'));
     }
 
     /**
@@ -86,7 +70,7 @@ class RestaurantController extends Controller
         $plate = Plates::findOrFail($id);
         $data = $request->all();
         $plate->update($data);
-        $data['ingredients'] = implode(',', $data['ingredients']);
+        $data['ingredients'] = $request->ingredients;
         $plate->update($data);
         return redirect()->route('admin.restaurants.show', $plate->restaurants_id);
     }
