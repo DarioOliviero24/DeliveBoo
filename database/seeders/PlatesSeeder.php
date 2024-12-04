@@ -34,7 +34,7 @@ class PlatesSeeder extends Seeder
 
         $restaurantIds = Restaurant::pluck('id')->toArray();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
 
             $ingredientsArrayRecipe = [];
 

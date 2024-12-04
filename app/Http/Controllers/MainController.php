@@ -15,7 +15,6 @@ class MainController extends Controller
         array_unshift($categorieList, 'tutti');
 
         $restaurants = Restaurant::with('categories')->get();
-        dd($restaurants);
         return view('welcome', compact('restaurants', 'categorieList'));
     }
 
@@ -37,7 +36,8 @@ class MainController extends Controller
 
     public function show($id)
     {
-        $restaurant = Restaurant::with(['categories', 'plates'])->findOrFail($id);
-        return view('welcomeShow', compact('restaurant'));
+        $restaurant = Restaurant::with(['categories'])->findOrFail($id);
+        $plates = Plates::where('restaurants_id', $id)->get();
+        return view('welcomeShow', compact('restaurant', 'plates'));
     }
 }
