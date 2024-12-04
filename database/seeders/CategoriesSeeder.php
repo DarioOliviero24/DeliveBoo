@@ -22,12 +22,17 @@ class CategoriesSeeder extends Seeder
             'Giapponese',
             'Cinese',
             'Indiano',
+            'Francese',
+            'Messicano',
+            'Greco',
+            'Tailandese',
+            'Mediterraneo',
         ];
 
 
         for ($i = 0; $i < 10; $i++) {
             Categories::create([
-                'tipologia' => $categories[rand(0, 4)],
+                'tipologia' => $categories[rand(0, 9)],
             ]);
         }
     }

@@ -23,8 +23,8 @@ use App\Http\Controllers\Admin\PlatesController;
 
 // Welcome home per tutti
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('show/{id}', [MainController::class, 'show'])->name('home.show');
-Route::get('filter', [MainController::class, 'filter'])->name('home.filter');
+Route::get('/filter', [MainController::class, 'filter'])->name('home.filter');
+Route::get('/restaurant/{id}', [MainController::class, 'show'])->name('home.show');
 
 // WelcomeLoggato home per loggati
 Route::resource('welcomeLoggato', WelcomeLoggatoController::class);

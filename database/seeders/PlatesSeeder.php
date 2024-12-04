@@ -15,21 +15,21 @@ class PlatesSeeder extends Seeder
     public function run(Faker $faker): void
     {
         $ingredients = [
-            'Sugar',
-            'Flour',
-            'Salt',
-            'Butter',
-            'Milk',
-            'Eggs',
-            'Cheese',
-            'Tomatoes',
-            'Basil',
-            'Garlic',
-            'Onion',
-            'Pepper',
-            'Chocolate',
-            'Vanilla',
-            'Cream'
+            'Zucchero',
+            'Farina',
+            'Sale',
+            'Burro',
+            'Latte',
+            'Uova',
+            'Formaggio',
+            'Pomodori',
+            'Basilico',
+            'Aglio',
+            'Cipolla',
+            'Pepe',
+            'Cioccolato',
+            'Vaniglia',
+            'Panna'
         ];
 
         $restaurantIds = Restaurant::pluck('id')->toArray();

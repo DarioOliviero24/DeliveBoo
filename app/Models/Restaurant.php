@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Categories;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Restaurant extends Model
 {
@@ -25,7 +26,8 @@ class Restaurant extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function categories(): HasMany {
-        return $this->hasMany(Categories::class);
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Categories::class, 'category_restaurant', 'restaurant_id', 'category_id');
     }
 }

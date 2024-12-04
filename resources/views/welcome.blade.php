@@ -1,35 +1,54 @@
 @extends('layouts.guest')
 
 @section('main-content')
-    <div style="background-color: #F5FFFA; padding: 20px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
-        <h1 class="text-center" style="color: black; font-size: 2.5rem; margin: 10px 0;">
-            DeliveBoo
-        </h1>
-        <div class="input-group mb-3 w-25 container">
-            <form action="{{ route('home.filter') }}" method="GET">
-                <select class="form-select" id="inputGroupSelect01" name="tipologia">
-                @foreach ($categorieList as $category)
-                        <option value="{{ $category }}" {{ request('tipologia') == $category ? 'selected' : '' }}>{{ $category }}</option>
-                    @endforeach
-                </select>
-                <br>
-                <button type="submit" class="btn btn-outline-success" >Cerca</button>
-            </form>
-        </div>
-        <h2 style="color: #6c757d; font-size: 2rem;">
-            @foreach ($restaurants as $restaurant)
-                <div style="background-color: #ffffff; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-                    <p style="color: black; font-size: 2.5rem;">{{ $restaurant->name }}</p>
-                    <a href="{{ route('home.show', $restaurant->id) }}" class="btn btn-outline-success">Vedi Piatti</a>
-
-                    @foreach ($restaurant->categories as $category)
-                        <p style="color: #6c757d;">Categoria: {{ $category->tipologia }}</p>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="{{ route('home.filter') }}" method="GET" class="mb-4">
+                    <div class="input-group">
+                        <select class="form-select" name="tipologia">
+                            @foreach ($categorieList as $categoria)
+                                <option value="{{ $categoria }}"
+                                    {{ (isset($selectedCategory) && $selectedCategory == $categoria) ? 'selected' : '' }}>
+                                    {{ ucfirst($categoria) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-outline-secondary" type="submit">Filtra</button>
+                    </div>
+                </form>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    @foreach ($restaurants as $restaurant)
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $restaurant->name }}</h5>
+                                    <p class="card-text">
+                                        <strong>Indirizzo:</strong> {{ $restaurant->address }}
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>Categorie:</strong>
+                                        @foreach ($restaurant->categories as $category)
+                                            <span class="badge bg-secondary me-1">{{ $category->tipologia }}</span>
+                                        @endforeach
+                                    </p>
+                                    <a href="{{ route('home.show', $restaurant->id) }}"
+                                       class="btn btn-primary">
+                                        Vedi Menu
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
 
-
-            @endforeach
-        </h2>
+                @if($restaurants->isEmpty())
+                    <div class="alert alert-info text-center mt-4">
+                        Nessun ristorante trovato per questa categoria.
+                    </div>
+                @endif
+            </div>
+        </div>
     </div>
 @endsection
 

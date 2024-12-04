@@ -9,47 +9,35 @@ use App\Models\Categories;
 
 class MainController extends Controller
 {
-
     public function index()
     {
-        $categorieList = [
-            'tutti',
-            'italiano',
-            'spagnolo',
-            'giapponese',
-            'cinese',
-            'indiano',
-        ];
+        $categorieList = Categories::pluck('tipologia')->unique()->toArray();
+        array_unshift($categorieList, 'tutti');
+
         $restaurants = Restaurant::with('categories')->get();
+        dd($restaurants);
         return view('welcome', compact('restaurants', 'categorieList'));
     }
+
     public function filter(Request $request)
     {
-        $categorieList = [
-            'tutti',
-            'italiano',
-            'spagnolo',
-            'giapponese',
-            'cinese',
-            'indiano',
-        ];
-        if($request->tipologia !== 'tutti'){
-            $restaurants = Restaurant::with('categories')
-                ->whereHas('categories', function($query) use ($request) {
-                    $query->where('tipologia', $request->tipologia);
-                })->get();
-        }else{
+        $categorieList = Categories::pluck('tipologia')->unique()->toArray();
+        array_unshift($categorieList, 'tutti');
+
+        if ($request->tipologia !== 'tutti') {
+            $restaurants = Restaurant::whereHas('categories', function($query) use ($request) {
+                $query->where('tipologia', $request->tipologia);
+            })->with('categories')->get();
+        } else {
             $restaurants = Restaurant::with('categories')->get();
         }
-        $optionValue = $request->tipologia;
-        return view('welcome', compact('restaurants', 'categorieList'));
+        $selectedCategory = $request->tipologia;
+        return view('welcome', compact('restaurants', 'categorieList', 'selectedCategory'));
     }
 
     public function show($id)
     {
-        $restaurant = Restaurant::with('categories')->find($id);
-        $plates = Plates::where('restaurants_id', $id)->get();
-        return view('welcomeShow', compact('restaurant', 'plates'));
+        $restaurant = Restaurant::with(['categories', 'plates'])->findOrFail($id);
+        return view('welcomeShow', compact('restaurant'));
     }
-
 }
