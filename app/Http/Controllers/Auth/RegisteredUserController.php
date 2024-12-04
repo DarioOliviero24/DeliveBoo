@@ -45,11 +45,21 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'restaurant_name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'P_Iva' => ['required', 'string', 'max:255'],
+            'P_Iva' => ['required', 'string', 'size:11', 'regex:/^[0-9]+$/'],
             'plate_name' => ['required', 'string', 'max:255'],
             'tipologia' => ['required', 'string', 'max:255'],
             'ingredients' => ['required', 'string', 'max:255'],
-            'price' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'numeric', 'min:0.01'],
+        ], [
+            'required' => 'Il campo :attribute è obbligatorio',
+            'email' => 'Inserisci un indirizzo email valido',
+            'max' => 'Il campo :attribute non può superare :max caratteri',
+            'unique' => 'Questa email è già stata registrata',
+            'confirmed' => 'Le password non coincidono',
+            'size' => 'La P.IVA deve essere di 11 numeri',
+            'regex' => 'La P.IVA deve contenere solo numeri',
+            'numeric' => 'Il prezzo deve essere un numero',
+            'min' => 'Il prezzo deve essere maggiore di zero',
         ]);
 
         $user = User::create([
