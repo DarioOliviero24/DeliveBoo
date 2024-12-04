@@ -24,13 +24,10 @@ class CategoriesSeeder extends Seeder
             'Indiano',
         ];
 
-        $restaurantIds = Restaurant::orderBy('id', 'asc')->pluck('id')->toArray();
-
 
         for ($i = 0; $i < 10; $i++) {
             Categories::create([
                 'tipologia' => $categories[rand(0, 4)],
-                'restaurant_id' => $restaurantIds[$i]
             ]);
         }
     }
