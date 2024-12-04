@@ -135,28 +135,30 @@
 
             <!-- tipologia -->
             <div class="mt-2 text-center py-1">
-                <label for="tipologia">
-                    <h5>
-                        Tipologia <span class="text-danger">*</span>
-                    </h5>
+                <label>
+                    <h5>Tipologia <span class="text-danger">*</span></h5>
                 </label>
-                <br>
-                <select class="form-select @error('tipologia') is-invalid @enderror"
-                        name="tipologia"
-                        id="tipologia"
-                        required
-                        oninvalid="this.setCustomValidity('Per favore seleziona una tipologia')"
-                        oninput="this.setCustomValidity('')"
-                        title="Per favore compila questo campo obbligatorio">
-                    <option value="">Seleziona una tipologia</option>
-                    @foreach ($categoriesList as $category)
-                        <option value="{{ $category }}" {{ old('tipologia') == $category ? 'selected' : '' }}>
-                            {{ $category }}
-                        </option>
-                    @endforeach
-                </select>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        @foreach($categories as $category)
+                            <div class="">
+                                <div class="form-check" style="display: flex; align-items: center;">
+                                    <input class="form-check-input @error('tipologia') is-invalid @enderror"
+                                           type="checkbox"
+                                           name="tipologia[]"
+                                           id="tipologia_{{ $loop->index }}"
+                                           value="{{ $category->id }}"
+                                           {{ in_array($category->id, old('tipologia', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="tipologia_{{ $loop->index }}">
+                                        {{ $category->tipologia }}
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 @error('tipologia')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
 

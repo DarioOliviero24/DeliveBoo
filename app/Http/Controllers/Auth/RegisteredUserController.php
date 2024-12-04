@@ -15,6 +15,7 @@ use Illuminate\View\View;
 use App\Models\Restaurant;
 use App\Models\Plates;
 use App\Models\Categories;
+use App\Models\CategoryRestaurant;
 class RegisteredUserController extends Controller
 {
     /**
@@ -22,14 +23,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $categoriesList = [
-            'italiano',
-            'spagnolo',
-            'giapponese',
-            'cinese',
-            'indiano',
-        ];
-        return view('auth.register', compact('categoriesList'));
+        $categories = Categories::all();
+
+        return view('auth.register', compact('categories'));
     }
 
     /**
@@ -39,6 +35,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -47,7 +44,7 @@ class RegisteredUserController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'P_Iva' => ['required', 'string', 'size:11', 'regex:/^[0-9]+$/'],
             'plate_name' => ['required', 'string', 'max:255'],
-            'tipologia' => ['required', 'string', 'max:255'],
+            'tipologia' => ['required', 'array'],
             'ingredients' => ['required', 'string', 'max:255'],
             'price' => ['required', 'numeric', 'min:0.01'],
         ], [
@@ -80,10 +77,12 @@ class RegisteredUserController extends Controller
 
         $restaurant->save();
 
-        $category = Categories::create([
-            'tipologia' => $request->tipologia,
-            'restaurant_id' => $restaurant->id,
-        ]);
+        foreach ($request->tipologia as $categoria) {
+            CategoryRestaurant::create([
+                'category_id' => $categoria,
+                'restaurant_id' => $restaurant->id,
+            ]);
+        }
 
         $plate = Plates::create([
             'plate_name' => $request->plate_name,

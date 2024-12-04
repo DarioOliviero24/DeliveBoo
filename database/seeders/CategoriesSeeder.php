@@ -32,7 +32,7 @@ class CategoriesSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             Categories::create([
-                'tipologia' => $categories[rand(0, 9)],
+                'tipologia' => $categories[$i],
             ]);
         }
     }

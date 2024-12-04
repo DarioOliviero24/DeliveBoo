@@ -11,17 +11,17 @@
                     Email
                 </h3>
             </label>
-            <input class="form-control me-2" placeholder="Inserisci l'email..." type="email" id="email" name="email">
+            <input class="form-control me-2" placeholder="Metti email..." type="email" id="email" name="email" required oninvalid="this.setCustomValidity('metti un email valido')" oninput="this.setCustomValidity('')">
         </div>
 
         <!-- Password -->
         <div class="mt-4 text-center py-2">
             <label for="password">
                 <h3>
-                    Password
+                    Metti password
                 </h3>
             </label>
-            <input class="form-control me-2" placeholder="Inserisci la password..." type="password" id="password" name="password">
+            <input class="form-control me-2" placeholder="Metti password..." type="password" id="password" name="password" required oninvalid="this.setCustomValidity('metti una password')" oninput="this.setCustomValidity('')">
         </div>
 
         <!-- Remember Me -->
