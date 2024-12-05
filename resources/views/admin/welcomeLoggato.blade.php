@@ -1,36 +1,62 @@
 @extends('layouts.app')
 
 @section('main-content')
-    <div style="background-color: #F5FFFA; padding: 20px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
-        <h1 class="text-center" style="color: black; font-size: 2.5rem;">
-            WELCOME TO DELIVEBOO
-            <div style="color: red;">{{ Auth::user()->name }}</div>
-        </h1>
-        <div class="input-group mb-3 w-25 container">
-            <form action="{{ route('admin.welcomeLoggato.filter') }}" method="GET">
-                <select class="form-select" id="inputGroupSelect01" name="tipologia">
-                    @foreach ($categorieList as $category)
-                        <option value="{{ $category }}">{{ $category }}</option>
-                    @endforeach
-                </select>
-                <br>
-                <button type="submit" class="btn btn-outline-success">Filtra</button>
-            </form>
-        </div>
-        <h2 class="text-center">
-            @foreach ($restaurants as $restaurant)
-                <div style="margin: 10px 0; width: 40%; height: 350px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);" class="card d-inline-flex text-center">
-                    <div style="background-color: white; border-radius: 15px;" class="card-body">
-                        <h5 style="color: black; font-size: 2.5rem;" class="card-title ">{{ $restaurant->name }}</h5>
-                        <p style="color: grey" class="card-text">{{ $restaurant->address }}</p>
-                        <a href="{{ route('welcomeLoggato.show', $restaurant->id) }}" class="btn btn-outline-success">Vedi Piatti</a>
+<div class="container py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+            <h1 class="display-4 text-center mb-4">
+                Benvenuto su DeliveBoo
+                <div class="text-danger">{{ Auth::user()->name }}</div>
+            </h1>
 
-                        @foreach ($restaurant->categories as $category)
-                            <p  style="color: #6c757d; margin-top: 10px;">Categoria: {{ $category->tipologia }}</p>
-                        @endforeach
-                    </div>
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-4">
+                    <form action="{{ route('admin.welcomeLoggato.filter') }}" method="GET">
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect01" name="tipologia">
+                                @foreach ($categorieList as $category)
+                                    <option value="{{ $category }}">{{ $category }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-filter me-2"></i>Cerca
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            @endforeach
-        </h2>
+            </div>
+
+            <div class="row g-4">
+                @foreach ($restaurants as $restaurant)
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0 hover-shadow">
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title h4 mb-3">{{ $restaurant->name }}</h5>
+                                <p class="text-muted mb-3">
+                                    <i class="fas fa-map-marker-alt me-2"></i>{{ $restaurant->address }}
+                                </p>
+                                <div class="mb-3">
+                                    @foreach ($restaurant->categories as $category)
+                                        <span class="badge bg-light text-dark me-2">{{ $category->tipologia }}</span>
+                                    @endforeach
+                                </div>
+                                <a href="{{ route('welcomeLoggato.show', $restaurant->id) }}"
+                                   class="btn btn-outline-success">
+                                    <i class="fas fa-utensils me-2"></i>Visualizza Menu
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
+</div>
+
+<style>
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+</style>
 @endsection

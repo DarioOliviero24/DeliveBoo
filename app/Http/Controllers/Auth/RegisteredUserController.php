@@ -16,6 +16,8 @@ use App\Models\Restaurant;
 use App\Models\Plates;
 use App\Models\Categories;
 use App\Models\CategoryRestaurant;
+use Illuminate\Support\Facades\DB;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -35,7 +37,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -59,42 +60,39 @@ class RegisteredUserController extends Controller
             'min' => 'Il prezzo deve essere maggiore di zero',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-
-        $restaurant = Restaurant::create([
-            'name' => $request->restaurant_name,
-            'address' => $request->address,
-            'P_Iva' => $request->P_Iva,
-            'user_id' => $user->id,
-        ]);
-
-        $restaurant->save();
-
-        foreach ($request->tipologia as $categoria) {
-            CategoryRestaurant::create([
-                'category_id' => $categoria,
-                'restaurant_id' => $restaurant->id,
+        return DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
             ]);
-        }
 
-        $plate = Plates::create([
-            'plate_name' => $request->plate_name,
-            'ingredients' => $request->ingredients,
-            'price' => $request->price,
-            'restaurants_id' => $restaurant->id,
-        ]);
+            event(new Registered($user));
 
-        $plate->save();
+            $restaurant = Restaurant::create([
+                'name' => $request->restaurant_name,
+                'address' => $request->address,
+                'P_Iva' => $request->P_Iva,
+                'user_id' => $user->id,
+            ]);
 
-        Auth::login($user);
+            for ($i = 0; $i < count($request->tipologia); $i++) {
+                CategoryRestaurant::create([
+                    'category_id' => $i+1,
+                    'restaurant_id' => $restaurant->id,
+                ]);
+            }
 
-        return redirect(RouteServiceProvider::HOME);
+            Plates::create([
+                'plate_name' => $request->plate_name,
+                'ingredients' => $request->ingredients,
+                'price' => $request->price,
+                'restaurants_id' => $restaurant->id,
+            ]);
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::HOME);
+        });
     }
 }

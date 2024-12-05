@@ -3,30 +3,56 @@
 @section('page-title', 'Restaurants')
 
 @section('main-content')
-    <h1 class="mb-4 py-3">Piatti del ristorante {{ $restaurant->name }}</h1>
-    <a href="{{ route('admin.plates.create', $restaurant->id) }}" class="btn btn-primary">
-        Create
-    </a>
-    <ul class="list-group py-5">
-        @foreach ($plates as $plate)
-            <li class="list-group-item" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: #F5FFFA; padding: 20px; border-radius: 10px; margin:10px 0;">
-                <h3>{{ $plate->plate_name }}</h3>
-                <p><strong>Ingredienti:</strong> {{ $plate->ingredients }}</p>
-                <p><strong style="color: red">Prezzo:</strong> €{{ number_format($plate->price, 2) }}</p>
-                <a href="{{ route('admin.restaurants.edit', $plate->id) }}" class="btn btn-primary btn-sm" style="margin: 10px 0px;">
-                    Modifica
-                </a>
-
-                <form action="{{ route('admin.plates.destroy', $plate->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
-                    <input type="hidden" name="plate_id" value="{{ $plate->id }}">
-                    <button type="submit" class="btn btn-danger btn-sm">
-                        Elimina
-                    </button>
-                </form>
-            </li>
-        @endforeach
-    </ul>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+                    <h1 class="h3 mb-0">Menu di {{ $restaurant->name }}</h1>
+                    <a href="{{ route('admin.plates.create', $restaurant->id) }}"
+                       class="btn btn-light">
+                        <i class="fas fa-plus me-2"></i>Nuovo Piatto
+                    </a>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        @foreach ($plates as $plate)
+                            <div class="col-md-6">
+                                <div class="card h-100 shadow-sm border-0 rounded-3">
+                                    <div class="card-body">
+                                        <h3 class="card-title h5 mb-3">{{ $plate->plate_name }}</h3>
+                                        <p class="card-text mb-2">
+                                            <small class="text-muted">Ingredienti:</small><br>
+                                            {{ $plate->ingredients }}
+                                        </p>
+                                        <p class="card-text text-danger fw-bold">
+                                            €{{ number_format($plate->price, 2) }}
+                                        </p>
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ route('admin.restaurants.edit', $plate->id) }}"
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-edit me-1"></i>Modifica
+                                            </a>
+                                            <form action="{{ route('admin.plates.destroy', $plate->id) }}"
+                                                  method="POST"
+                                                  class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
+                                                <input type="hidden" name="plate_id" value="{{ $plate->id }}">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                    <i class="fas fa-trash me-1"></i>Cancella
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

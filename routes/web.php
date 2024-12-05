@@ -44,6 +44,10 @@ Route::prefix('admin')
 
 });
 
-
+Route::post('/cart/add', [MainController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [MainController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/remove', [MainController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/clear', [MainController::class, 'clearCart'])->name('cart.clear');
+Route::post('/orders', [MainController::class, 'storeOrder'])->name('orders.store');
 
 require __DIR__.'/auth.php';

@@ -57,7 +57,7 @@ class PlatesController extends Controller
 
         $request->validate([
             'plate_name' => 'required|string|max:255',
-            'ingredients' => 'required|array',
+            'ingredients' => 'required|string',
             'price' => 'required|numeric|min:0',
             'restaurant_id' => 'required|exists:restaurants,id',
         ]);
@@ -65,7 +65,7 @@ class PlatesController extends Controller
 
 
         $data = $request->all();
-        $data['ingredients'] = $request->$ingredients;
+        $data['ingredients'] = $request->ingredients;
         $data['restaurants_id'] = $request->restaurant_id;
 
         $newPlate = new Plates($data);
