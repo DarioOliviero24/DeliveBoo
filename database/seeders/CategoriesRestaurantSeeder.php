@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Restaurant;
 use App\Models\Categories;
 
-class CategoryRestaurantSeeder extends Seeder
+class CategoriesRestaurantSeeder extends Seeder
 {
     public function run()
     {

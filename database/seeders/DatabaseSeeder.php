@@ -10,7 +10,7 @@ use Database\Seeders\OrderSeeder;
 use Database\Seeders\CategoriesSeeder;
 use Database\Seeders\PlatesSeeder;
 use Database\Seeders\UsersSeeder;
-use Database\Seeders\CategoryRestaurantSeeder;
+use Database\Seeders\CategoriesRestaurantSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             PlatesSeeder::class,
             OrderSeeder::class,
             OrderPlatesSeeder::class,
-            CategoryRestaurantSeeder::class,
+            CategoriesRestaurantSeeder::class,
         ]);
     }
 }
