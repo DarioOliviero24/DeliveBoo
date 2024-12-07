@@ -30,7 +30,28 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span class="mx-3">€{{ number_format($item['price'], 2) }}</span>
+                                    <div class="quantity-controls d-flex align-items-center me-3">
+                                        <form action="{{ route('cart.update-quantity') }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <input type="hidden" name="plate_id" value="{{ $item['id'] }}">
+                                            <input type="hidden" name="action" value="decrease">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary" {{ ($item['quantity'] ?? 1) <= 1 ? 'disabled' : '' }}>
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </form>
+
+                                        <span class="mx-2">{{ $item['quantity'] ?? 1 }}</span>
+
+                                        <form action="{{ route('cart.update-quantity') }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <input type="hidden" name="plate_id" value="{{ $item['id'] }}">
+                                            <input type="hidden" name="action" value="increase">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <span class="mx-3">€{{ number_format($item['price'] * ($item['quantity'] ?? 1), 2) }}</span>
                                     <form action="{{ route('cart.remove') }}" method="POST" class="d-inline">
                                         @csrf
                                         <input type="hidden" name="plate_id" value="{{ $item['id'] }}">
@@ -40,7 +61,7 @@
                                     </form>
                                 </div>
                             </div>
-                            @php $totale += $item['price']; @endphp
+                            @php $totale += $item['price'] * ($item['quantity'] ?? 1); @endphp
                         @endforeach
  <form action="{{ route('cart.clear') }}" method="POST" class="mt-3" onsubmit="return confirm('Sei sicuro di voler svuotare il carrello?');">
                             @csrf

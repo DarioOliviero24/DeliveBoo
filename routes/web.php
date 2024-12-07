@@ -49,5 +49,6 @@ Route::get('/cart', [MainController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/remove', [MainController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/clear', [MainController::class, 'clearCart'])->name('cart.clear');
 Route::post('/orders', [MainController::class, 'storeOrder'])->name('orders.store');
+Route::post('/cart/update-quantity', [MainController::class, 'updateQuantity'])->name('cart.update-quantity');
 
 require __DIR__.'/auth.php';

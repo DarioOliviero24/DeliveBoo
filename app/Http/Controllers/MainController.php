@@ -53,6 +53,7 @@ class MainController extends Controller
             'id' => $plate->id,
             'name' => $plate->plate_name,
             'price' => $plate->price,
+            'quantity' => 1,
             'img' => $plate->img,
             'restaurant_name' => $restaurant->name,
             'restaurant_id' => $restaurant->id
@@ -109,5 +110,30 @@ class MainController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Si è verificato un errore durante il processo di ordine.');
         }
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $plateId = $request->plate_id;
+        $action = $request->action;
+
+        // Trova l'indice dell'elemento nel carrello
+        $index = array_search($plateId, array_column($cart, 'id'));
+
+        if ($index !== false) {
+            if (!isset($cart[$index]['quantity'])) {
+                $cart[$index]['quantity'] = 1;
+            }
+
+            if ($action === 'increase') {
+                $cart[$index]['quantity']++;
+            } elseif ($action === 'decrease' && $cart[$index]['quantity'] > 1) {
+                $cart[$index]['quantity']--;
+            }
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back();
     }
 }
