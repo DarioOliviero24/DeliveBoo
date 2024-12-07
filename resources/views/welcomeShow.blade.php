@@ -23,6 +23,16 @@
                     @foreach ($plates as $plate)
                         <div class="col-md-6">
                             <div class="card h-100 shadow-sm border-0 hover-shadow">
+                                @if($plate->img)
+                                    <img src="{{ $plate->img }}"
+                                         class="card-img-top"
+                                         alt="{{ $plate->plate_name }}"
+                                         style="height: 200px; object-fit: cover;">
+                                @else
+                                    <div class="bg-light text-center py-5">
+                                        <i class="fas fa-utensils fa-3x text-secondary"></i>
+                                    </div>
+                                @endif
                                 <div class="card-body">
                                     <h3 class="card-title h5 mb-3">{{ $plate->plate_name }}</h3>
                                     <p class="card-text mb-2">

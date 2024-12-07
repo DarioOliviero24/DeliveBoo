@@ -12,9 +12,22 @@
                         @php $totale = 0; @endphp
                         @foreach(session('cart') as $item)
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div>
-                                    <h5 class="mb-0">{{ $item['name'] }}</h5>
-                                    <small class="text-muted">{{ $item['restaurant_name'] }}</small>
+                                <div class="d-flex align-items-center">
+                                    @if(isset($item['img']))
+                                        <img src="{{ $item['img'] }}"
+                                             alt="{{ $item['name'] }}"
+                                             class="me-3 rounded"
+                                             style="width: 60px; height: 60px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-light rounded me-3 d-flex align-items-center justify-content-center"
+                                             style="width: 60px; height: 60px;">
+                                            <i class="fas fa-utensils text-secondary"></i>
+                                        </div>
+                                    @endif
+                                    <div>
+                                        <h5 class="mb-0">{{ $item['name'] }}</h5>
+                                        <small class="text-muted">{{ $item['restaurant_name'] }}</small>
+                                    </div>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <span class="mx-3">€{{ number_format($item['price'], 2) }}</span>

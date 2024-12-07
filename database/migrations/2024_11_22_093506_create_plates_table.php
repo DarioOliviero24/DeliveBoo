@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('plates', function (Blueprint $table) {
             $table->id();
             $table->string('plate_name');
+            $table->string('img')->nullable();
             $table->string('ingredients');
             $table->float('price', 8, 2);
             //VISIBILE SI/NO

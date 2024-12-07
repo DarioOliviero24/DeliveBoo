@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('admin.restaurants.update', $plate->id) }}" method="POST">
+                        <form action="{{ route('admin.restaurants.update', $plate->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -29,6 +29,16 @@
                             <div class="mb-4">
                                 <label for="price" class="form-label fw-bold">Prezzo:</label>
                                 <input type="number" id="price" name="price" value="{{ $plate->price }}" class="form-control" step="0.01" min="0">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="img" class="form-label fw-bold">Immagine del piatto:</label>
+                                @if($plate->img && str_starts_with($plate->img, 'plates/'))
+                                    <div class="mb-2">
+                                        <img src="{{ asset('storage/' . $plate->img) }}" alt="{{ $plate->plate_name }}" style="max-width: 200px">
+                                    </div>
+                                @endif
+                                <input type="file" id="img" name="img" class="form-control" accept="image/*">
                             </div>
 
                             <div class="d-flex gap-2">

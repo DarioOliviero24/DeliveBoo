@@ -19,6 +19,23 @@
                         @foreach ($plates as $plate)
                             <div class="col-md-6">
                                 <div class="card h-100 shadow-sm border-0 rounded-3">
+                                    @if($plate->img)
+                                        @if(str_starts_with($plate->img, 'plates/'))
+                                            <img src="{{ asset('storage/' . $plate->img) }}"
+                                                 class="card-img-top"
+                                                 alt="{{ $plate->plate_name }}"
+                                                 style="height: 200px; object-fit: cover;">
+                                        @else
+                                            <img src="{{ $plate->img }}"
+                                                 class="card-img-top"
+                                                 alt="{{ $plate->plate_name }}"
+                                                 style="height: 200px; object-fit: cover;">
+                                        @endif
+                                    @else
+                                        <div class="bg-light text-center py-5">
+                                            <i class="fas fa-utensils fa-3x text-secondary"></i>
+                                        </div>
+                                    @endif
                                     <div class="card-body">
                                         <h3 class="card-title h5 mb-3">{{ $plate->plate_name }}</h3>
                                         <p class="card-text mb-2">

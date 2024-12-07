@@ -53,6 +53,7 @@ class MainController extends Controller
             'id' => $plate->id,
             'name' => $plate->plate_name,
             'price' => $plate->price,
+            'img' => $plate->img,
             'restaurant_name' => $restaurant->name,
             'restaurant_id' => $restaurant->id
         ];

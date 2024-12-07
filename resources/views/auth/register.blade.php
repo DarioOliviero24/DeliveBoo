@@ -202,7 +202,8 @@
                        oninvalid="this.setCustomValidity('Per favore inserisci la P.IVA di 11 numeri')"
                        oninput="this.setCustomValidity('')"
                        title="La P.IVA deve contenere esattamente 11 numeri"
-                       title="Per favore compila questo campo obbligatorio">
+                       title="Per favore compila questo campo obbligatorio"
+                       maxlength="11">
                 @error('P_Iva')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -255,6 +256,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
             <!-- price -->
             <div class="mt-2 text-center py-1">
                 <label for="price">

@@ -15,7 +15,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
-                    <form action="{{ route('admin.plates.store') }}" method="POST">
+                    <form action="{{ route('admin.plates.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
@@ -28,6 +28,18 @@
                                 class="form-control @error('plate_name') is-invalid @enderror"
                                 value="{{ old('plate_name') }}">
                             @error('plate_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="img" class="form-label"><strong>Immagine del piatto</strong></label>
+                            <input type="file"
+                                id="img"
+                                name="img"
+                                class="form-control @error('img') is-invalid @enderror"
+                                accept="image/*">
+                            @error('img')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
