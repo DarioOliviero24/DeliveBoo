@@ -98,16 +98,17 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <form action="{{ route('cart.clear') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="fas fa-trash me-2"></i>Svuota carrello
-                                    </button>
-                                </form>
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-check me-2"></i>Conferma Ordine
                                 </button>
                             </div>
+                        </form>
+
+                        <form action="{{ route('cart.clear') }}" method="POST" class="mt-3">
+                            @csrf
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-trash me-2"></i>Svuota carrello
+                            </button>
                         </form>
                     </div>
                 </div>
