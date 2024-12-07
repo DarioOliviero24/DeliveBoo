@@ -42,6 +42,12 @@
                             </div>
                             @php $totale += $item['price']; @endphp
                         @endforeach
+ <form action="{{ route('cart.clear') }}" method="POST" class="mt-3" onsubmit="return confirm('Sei sicuro di voler svuotare il carrello?');">
+                            @csrf
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-trash me-2"></i>Svuota carrello
+                            </button>
+                        </form>
 
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
@@ -104,12 +110,7 @@
                             </div>
                         </form>
 
-                        <form action="{{ route('cart.clear') }}" method="POST" class="mt-3" onsubmit="return confirm('Sei sicuro di voler svuotare il carrello?');">
-                            @csrf
-                            <button type="submit" class="btn btn-warning">
-                                <i class="fas fa-trash me-2"></i>Svuota carrello
-                            </button>
-                        </form>
+
                     </div>
                 </div>
             @else
