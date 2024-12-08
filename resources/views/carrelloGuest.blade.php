@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('main-content')
-<div class="container py-5">
+<div class="container py-5 ">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2 class="mb-4">Il tuo carrello</h2>
