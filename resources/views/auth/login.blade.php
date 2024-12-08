@@ -1,48 +1,82 @@
 @extends('layouts.guest')
 
 @section('main-content')
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0" style="background-color: #2a2a2a;">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4" style="color: var(--accent-color);">Accedi</h2>
 
-        <!-- Email Address -->
-        <div class="text-center py-2">
-            <label for="email">
-                <h3>
-                    Email
-                </h3>
-            </label>
-            <input class="form-control me-2" placeholder="Metti email..." type="email" id="email" name="email" required oninvalid="this.setCustomValidity('metti un email valido')" oninput="this.setCustomValidity('')">
-        </div>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-        <!-- Password -->
-        <div class="mt-4 text-center py-2">
-            <label for="password">
-                <h3>
-                    Metti password
-                </h3>
-            </label>
-            <input class="form-control me-2" placeholder="Metti password..." type="password" id="password" name="password" required oninvalid="this.setCustomValidity('metti una password')" oninput="this.setCustomValidity('')">
-        </div>
+                        <div class="mb-4">
+                            <label for="email" class="form-label text-light">Email</label>
+                            <input class="form-control custom-input"
+                                   placeholder="La tua email..."
+                                   type="email"
+                                   id="email"
+                                   name="email"
+                                   required>
+                        </div>
 
-        <!-- Remember Me -->
-        <div class="mt-4 text-center py-2">
-            <label for="remember_me" class="form-check-label">
-                <input id="remember_me" type="checkbox" name="remember" class="form-check-input me-1">
-                Ricordami
-            </label>
-        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label text-light">Password</label>
+                            <input class="form-control custom-input"
+                                   placeholder="La tua password..."
+                                   type="password"
+                                   id="password"
+                                   name="password"
+                                   required>
+                        </div>
 
-        <div class="text-center py-5">
-            <button class="btn btn-primary" type="submit">
-                Log in
-            </button>
-            <div class="mt-2">
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}">
-                        {{ __('Hai dimenticato la password?') }}
-                    </a>
-                @endif
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input id="remember_me" type="checkbox" name="remember" class="form-check-input">
+                                <label for="remember_me" class="form-check-label text-light">
+                                    Ricordami
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-warning" type="submit">
+                                Accedi
+                            </button>
+                        </div>
+
+                        @if (Route::has('password.request'))
+                            <div class="text-center mt-3">
+                                <a href="{{ route('password.request') }}" class="text-light text-decoration-none">
+                                    Password dimenticata?
+                                </a>
+                            </div>
+                        @endif
+                    </form>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
+</div>
+
+<style>
+.custom-input {
+    background-color: #333333;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+
+.custom-input:focus {
+    background-color: #404040;
+    border-color: var(--accent-color);
+    color: white;
+    box-shadow: none;
+}
+
+.form-check-input:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+</style>
 @endsection
