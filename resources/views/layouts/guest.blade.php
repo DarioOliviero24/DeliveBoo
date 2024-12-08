@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <meta charset="UFT-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DeliveBoo</title>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
     <body>
@@ -38,9 +37,11 @@
                 </div>
             </div>
         </nav>
+
         <div style="margin-top: 76px; min-height: calc(100vh - 76px);">
             @yield('main-content')
         </div>
+
         <footer class="bg-dark text-light py-4 mt-5">
             <div class="container">
                 <div class="row">
@@ -73,12 +74,5 @@
                 </div>
             </div>
         </footer>
-        <main class="py-4">
-            <div class="container">
-                @yield('main-content')
-
-
-            </div>
-        </main>
     </body>
 </html>
